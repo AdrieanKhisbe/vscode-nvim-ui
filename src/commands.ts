@@ -16,42 +16,25 @@ interface CommandArgs {
 const extensionConfigHelper = (extensionConfig: any, value: string): string =>
   extensionConfig.get(value);
 
+const COMMAND_TO_CONFIG_NAME = {
+  'nvim-theme.normal': 'nvimColorNormal',
+  'nvim-theme.insert': 'nvimColorInsert',
+  'nvim-theme.visual': 'nvimColorVisual',
+  'nvim-theme.replace':'nvimColorVisual' // !FIXME: check no typo?
+};
+
 export const commands = ({
   workbenchConfig,
   colorCustomizationKeys,
   currentColorCustomizations,
   extensionConfig
-}: CommandArgs) => [
-  vscode.commands.registerCommand('nvim-theme.normal', function () {
+}: CommandArgs) => Object.entries(COMMAND_TO_CONFIG_NAME).map(([commandName, configName]) =>
+  vscode.commands.registerCommand(commandName, function () {
     changeColor(
       workbenchConfig,
       colorCustomizationKeys,
       currentColorCustomizations,
-      extensionConfigHelper(extensionConfig, 'nvimColorNormal')
-    );
-  }),
-  vscode.commands.registerCommand('nvim-theme.insert', function () {
-    changeColor(
-      workbenchConfig,
-      colorCustomizationKeys,
-      currentColorCustomizations,
-      extensionConfigHelper(extensionConfig, 'nvimColorInsert')
-    );
-  }),
-  vscode.commands.registerCommand('nvim-theme.visual', function () {
-    changeColor(
-      workbenchConfig,
-      colorCustomizationKeys,
-      currentColorCustomizations,
-      extensionConfigHelper(extensionConfig, 'nvimColorVisual')
-    );
-  }),
-  vscode.commands.registerCommand('nvim-theme.replace', function () {
-    changeColor(
-      workbenchConfig,
-      colorCustomizationKeys,
-      currentColorCustomizations,
-      extensionConfigHelper(extensionConfig, 'nvimColorVisual')
+      extensionConfigHelper(extensionConfig, configName)
     );
   })
-];
+  );
