@@ -28,10 +28,7 @@ export function activate(context: vscode.ExtensionContext) {
   const extensionConfig = getConfiguration('nvim-ui');
   const workbenchConfig = getConfiguration('workbench');
 
-  const { colorCustomizationKeys } = getConfig(
-    workbenchConfig,
-    extensionConfig
-  );
+  const { colorCustomizationKeys } = getConfig(workbenchConfig, extensionConfig);
 
   // const operationMode = workbenchConfig.get('nvimUiMode')
 

@@ -78,6 +78,7 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "test": "node ./out/test/runTest.js"
   },
+  "dependencies": {},
   "devDependencies": {
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
@@ -92,8 +93,5 @@
     "prettier": "^2.8.6",
     "typescript": "^4.9.5",
     "vsce": "^2.15.0"
-  },
-  "dependencies": {
-    "zod": "^3.21.4"
   }
 }

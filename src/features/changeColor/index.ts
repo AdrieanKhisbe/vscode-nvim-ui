@@ -11,11 +11,7 @@ export const DEFAULT_CUSTOMIZATION_KEYS = [
   'statusBar.border'
 ];
 
-export function changeColor(
-  workbenchConfig: any,
-  colorCustomizationKeys: string[],
-  color: string
-) {
+export function changeColor(workbenchConfig: any, colorCustomizationKeys: string[], color: string) {
   const keys = colorCustomizationKeys || [...DEFAULT_CUSTOMIZATION_KEYS];
 
   for (const key of keys) {
