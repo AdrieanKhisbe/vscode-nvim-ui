@@ -9,7 +9,6 @@ import * as vscode from 'vscode';
 interface CommandArgs {
   workbenchConfig: vscode.WorkspaceConfiguration;
   colorCustomizationKeys: string[];
-  currentColorCustomizations: Record<string, string>;
   extensionConfig: vscode.WorkspaceConfiguration;
 }
 
@@ -26,14 +25,12 @@ const COMMAND_TO_CONFIG_NAME = {
 export const commands = ({
   workbenchConfig,
   colorCustomizationKeys,
-  currentColorCustomizations,
   extensionConfig
 }: CommandArgs) => Object.entries(COMMAND_TO_CONFIG_NAME).map(([commandName, configName]) =>
   vscode.commands.registerCommand(commandName, function () {
     changeColor(
       workbenchConfig,
       colorCustomizationKeys,
-      currentColorCustomizations,
       extensionConfigHelper(extensionConfig, configName)
     );
   })

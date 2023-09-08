@@ -21,17 +21,14 @@ function getConfig(
     extensionConfig.get<string[]>('nvimColorCustomizationKeys') ||
     [];
 
-  const currentColorCustomizations =
-    workbenchConfig.get<Record<string, string>>('colorCustomizations') || {};
-
-  return { colorCustomizationKeys, currentColorCustomizations };
+  return { colorCustomizationKeys };
 }
 
 export function activate(context: vscode.ExtensionContext) {
   const extensionConfig = getConfiguration('nvim-ui');
   const workbenchConfig = getConfiguration('workbench');
 
-  const { colorCustomizationKeys, currentColorCustomizations } = getConfig(
+  const { colorCustomizationKeys } = getConfig(
     workbenchConfig,
     extensionConfig
   );
@@ -41,8 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
   commands({
     extensionConfig,
     workbenchConfig,
-    colorCustomizationKeys,
-    currentColorCustomizations
+    colorCustomizationKeys
   }).forEach((cmd) => context.subscriptions.push(cmd));
 }
 
